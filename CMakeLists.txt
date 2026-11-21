@@ -18,5 +18,10 @@ add_executable(FileManager
     CommandHandler/CommandHandler.h
     ConsoleCommands/ConsoleCommands.cpp
     ConsoleCommands/ConsoleCommands.h
+    Commands/Commands.h
+    Commands/MoveCommand/MoveCommand.h
+    Commands/MoveCommand/MoveCommand.cpp
+    Commands/CopyCommand/CopyCommand.h
+    Commands/CopyCommand/CopyCommand.cpp
     FilesInformation.h
 )

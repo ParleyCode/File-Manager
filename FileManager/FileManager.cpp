@@ -11,12 +11,14 @@
 
 void FileManager::removeFile(std::vector<std::string> &arguments){
     for(const auto& element : arguments){
-        if(fs::exists(element)){
-            if(fs::is_directory(element)){
+        fs::path currentPath = filesInformation.getCurrentPath();
+        fs::path finalPath = currentPath / element;
+        if(fs::exists(finalPath)){
+            if(fs::is_directory(finalPath)){
                 std::cout << "rm: failed to remove '"<<element<<"': Is a directory.";
             }
             else{
-                fs::remove(element);
+                fs::remove(finalPath);
                 continue;
             }
         }
@@ -27,7 +29,10 @@ void FileManager::removeFile(std::vector<std::string> &arguments){
 
 void FileManager::touchFiles(std::vector<std::string>& arguments){
     for(const auto& element : arguments){
-        std::ofstream(element, std::ios::app);
+        fs::path currentPath = filesInformation.getCurrentPath();
+        fs::path finalPath = currentPath / element;
+
+        std::ofstream(finalPath, std::ios::app);
     }
     arguments.clear();
 }

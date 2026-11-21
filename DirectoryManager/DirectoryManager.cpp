@@ -9,8 +9,14 @@
 
 void DirectoryManager::changeDirectory(std::vector<std::string>& arguments){
     fs::path currentPath = filesInformation.getCurrentPath();
-    if(arguments.size() != 1){
-        std::cout << "cd: failure to change directory: too much arguments";
+    if(arguments.size() > 1){
+        std::cout << "cd: failure to change directory: too much arguments\n";
+        return;
+    }
+    if(arguments.size() == 0){
+        currentPath = currentPath.parent_path();
+        filesInformation.setCurrentPath(currentPath);
+        arguments.clear();
         return;
     }
     fs::path argumentPath = arguments[0];
@@ -26,6 +32,9 @@ void DirectoryManager::changeDirectory(std::vector<std::string>& arguments){
                 currentPath /= element;
                 }
             }
+            else{
+                std::cout << "cd: failed to change directory "<< element << "does not exist.\n";
+            }
         }
     }
     filesInformation.setCurrentPath(currentPath);
@@ -34,17 +43,22 @@ void DirectoryManager::changeDirectory(std::vector<std::string>& arguments){
 
 void DirectoryManager::makeDirectory(std::vector<std::string> &arguments){
     for(const auto& element : arguments){
-        fs::create_directory(element);
+        fs::path currentPath = filesInformation.getCurrentPath();
+        fs::path finalPath = currentPath / element;
+        fs::create_directory(finalPath);
     }
     arguments.clear();
 }
 
 void DirectoryManager::removeDirectory(std::vector<std::string> &arguments){
     for(const auto& element : arguments){
-        if(fs::exists(element)){
-            if(fs::is_directory(element)){
-                if(fs::is_empty(element)){
-                fs::remove(element);
+        fs::path currentPath = filesInformation.getCurrentPath();
+        fs::path finalPath = currentPath / element;
+
+        if(fs::exists(finalPath)){
+            if(fs::is_directory(finalPath)){
+                if(fs::is_empty(finalPath)){
+                fs::remove(finalPath);
                 continue;
                 }
                 std::cout << "rmdir: failed to remomve '"<<element<<"': Directory is not empty.\n"; 
