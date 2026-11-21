@@ -1,7 +1,9 @@
 #include "ConsoleUI.h"
-#include "CommandHandler.h"
-#include "DirectoryManager.h"
-#include "FileManager.h"
+#include "../CommandHandler/CommandHandler.h"
+#include "../ConsoleCommands/ConsoleCommands.h"
+#include "../DirectoryManager/DirectoryManager.h"
+#include "../FileManager/FileManager.h"
+#include "../FilesInformation.h"
 #include <cstdio>
 #include <exception>
 #include <filesystem>
@@ -10,13 +12,15 @@
 #include <string>
 
 void ConsoleUI::getCommand(){
-    FileManager fileManager;
-    DirectoryManager directoryManager(fileManager);
-    CommandHandler commandHandler(directoryManager);
+    ConsoleCommands consoleCommands;
+    FilesInformation filesInformation;
+    FileManager fileManager(filesInformation, consoleCommands);
+    DirectoryManager directoryManager(filesInformation, consoleCommands);
+    CommandHandler commandHandler(directoryManager, fileManager, consoleCommands, filesInformation);
 
 
     while (true) {
-        fs::path currentPath = fileManager.getCurrentPath();
+        fs::path currentPath = filesInformation.getCurrentPath();
         std::string currentDirectory = currentPath.filename().string();
         std::string input;
         std::string command;

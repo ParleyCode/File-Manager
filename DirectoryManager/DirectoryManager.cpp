@@ -3,10 +3,12 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include "FileManager.h"
+#include "../ConsoleCommands/ConsoleCommands.h"
+#include "../FileManager/FileManager.h"
+#include "../FilesInformation.h"
 
 void DirectoryManager::changeDirectory(std::vector<std::string>& arguments){
-    fs::path currentPath = fileManager.getCurrentPath();
+    fs::path currentPath = filesInformation.getCurrentPath();
     if(arguments.size() != 1){
         std::cout << "cd: failure to change directory: too much arguments";
         return;
@@ -26,15 +28,15 @@ void DirectoryManager::changeDirectory(std::vector<std::string>& arguments){
             }
         }
     }
-    fileManager.setCurrentPath(currentPath);
-    getFileManager().clearArguments(arguments);
+    filesInformation.setCurrentPath(currentPath);
+    arguments.clear();
 }
 
 void DirectoryManager::makeDirectory(std::vector<std::string> &arguments){
     for(const auto& element : arguments){
         fs::create_directory(element);
     }
-    getFileManager().clearArguments(arguments);
+    arguments.clear();
 }
 
 void DirectoryManager::removeDirectory(std::vector<std::string> &arguments){
@@ -54,7 +56,40 @@ void DirectoryManager::removeDirectory(std::vector<std::string> &arguments){
         std::cout <<"rmdir: failed to remove '"<< element << "': No such directory\n";
         continue;
     }
-    getFileManager().clearArguments(arguments);
+    arguments.clear();
 }
 
-DirectoryManager::DirectoryManager(FileManager& fm) : fileManager(fm){}
+void DirectoryManager::printWorkingDirectory(CommandHandler& commandHandler, std::vector<std::string> &argumnets){
+    std::cout << filesInformation.getCurrentPath() << "\n";
+    argumnets.clear();
+}
+
+void DirectoryManager::localStorage(std::vector<std::string> &arguments){
+    int count = 0;
+    bool showHidden = false;
+    for(const auto& arg : arguments){
+        if(arg == "-a"){showHidden = true;}
+    }
+
+    for(const auto& entry : fs::directory_iterator(filesInformation.getCurrentPath())){
+        std::string filename = entry.path().filename().string();
+        if(filename[0] == '.' && !showHidden){
+            continue;
+        }
+        else{
+            if(fs::is_directory(entry)){
+                std::cout << entry.path().filename().string() << "/\t";
+                continue;
+            }
+            std::cout << entry.path().filename().string() << "\t";
+        }
+        ++count;
+        if(count % 7 == 0){
+            std::cout << "\n";
+        }
+    }
+    std::cout << "\n";
+    arguments.clear();
+}
+
+DirectoryManager::DirectoryManager(FilesInformation& fi, ConsoleCommands& cc) : filesInformation(fi), consoleCommands(cc){}

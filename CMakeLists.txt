@@ -8,12 +8,15 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(FileManager
     main.cpp
-    FileManager.cpp
-    FileManager.h
-    DirectoryManager.cpp
-    DirectoryManager.h
-    ConsoleUI.cpp
-    ConsoleUI.h
-    CommandHandler.cpp
-    CommandHandler.h
+    FileManager/FileManager.cpp
+    FileManager/FileManager.h
+    DirectoryManager/DirectoryManager.cpp
+    DirectoryManager/DirectoryManager.h
+    ConsoleUI/ConsoleUI.cpp
+    ConsoleUI/ConsoleUI.h
+    CommandHandler/CommandHandler.cpp
+    CommandHandler/CommandHandler.h
+    ConsoleCommands/ConsoleCommands.cpp
+    ConsoleCommands/ConsoleCommands.h
+    FilesInformation.h
 )

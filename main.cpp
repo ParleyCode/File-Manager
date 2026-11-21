@@ -1,8 +1,8 @@
 #include <iostream>
-#include "ConsoleUI.h"
-#include "CommandHandler.h"
-#include "DirectoryManager.h"
-#include "FileManager.h"
+#include "ConsoleUI/ConsoleUI.h"
+#include "CommandHandler/CommandHandler.h"
+#include "DirectoryManager/DirectoryManager.h"
+#include "FileManager/FileManager.h"
 
 int main(){
     ConsoleUI ConsoleUi;
