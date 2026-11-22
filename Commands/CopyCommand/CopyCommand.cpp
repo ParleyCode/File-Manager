@@ -15,6 +15,7 @@ void CopyCommand::copy(std::vector<std::string> &arguments){
     }
 
     fs::copy(source, finalLocation);
+    arguments.clear();
 }
 
 CopyCommand::CopyCommand(FilesInformation& fi) : filesInformation(fi){}

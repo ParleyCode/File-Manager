@@ -12,8 +12,8 @@
 #include <string>
 
 void ConsoleUI::getCommand(){
-    ConsoleCommands consoleCommands;
     FilesInformation filesInformation;
+    ConsoleCommands consoleCommands(filesInformation);
     FileManager fileManager(filesInformation, consoleCommands);
     DirectoryManager directoryManager(filesInformation, consoleCommands);
     CommandHandler commandHandler(directoryManager, fileManager, consoleCommands, filesInformation);

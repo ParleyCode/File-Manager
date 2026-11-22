@@ -20,6 +20,7 @@ void MoveCommand::move(std::vector<std::string>& arguments) {
     }
 
     fs::rename(source, finalLocation);
+    arguments.clear();
 }
 
 MoveCommand::MoveCommand(FilesInformation& fi): filesInformation(fi){}

@@ -6,6 +6,7 @@
 #include <functional>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 void CommandHandler::isCommandValid(std::string command,std::vector<std::string>& arguments) {
     std::unordered_map<std::string,std::function<void(std::vector<std::string>&)>> allCommands = {
@@ -29,7 +30,13 @@ void CommandHandler::isCommandValid(std::string command,std::vector<std::string>
         //Move Command
         {"mv", [this](std::vector<std::string>& arguments){MoveCommand moveCommand(filesInformation); moveCommand.move(arguments);}},
         //Copy Command
-        {"cp", [this](std::vector<std::string>& arguments){CopyCommand copyCommand(filesInformation); copyCommand.copy(arguments);}}
+        {"cp", [this](std::vector<std::string>& arguments){CopyCommand copyCommand(filesInformation); copyCommand.copy(arguments);}},
+        //Exit Command
+        {"exit", [](std::vector<std::string>& arguments){exit(0);}},
+        //Echo Command
+        {"echo", [this](std::vector<std::string>& arguments){this->consoleCommands.echo(arguments);}},
+        //Cat Command
+        {"cat", [this](std::vector<std::string>& arguments){this->consoleCommands.cat(arguments);}}
 
     };
 
