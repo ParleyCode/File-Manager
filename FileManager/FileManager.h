@@ -17,6 +17,7 @@ class FileManager{
     public:
     void removeFile(std::vector<std::string>& arguments);
     void touchFiles(std::vector<std::string>& argumnets);
+    void renameFiles(std::vector<std::string>& arguments);
 
     FileManager(FilesInformation& fi, ConsoleCommands& cc);
 };

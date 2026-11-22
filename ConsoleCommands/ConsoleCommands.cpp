@@ -72,6 +72,7 @@ void ConsoleCommands::cat(std::vector<std::string> &arguments){
         std::getline(fs, line);
         std::cout<< line << "\n";
     }
+    arguments.clear();
 }
 
 ConsoleCommands::ConsoleCommands(FilesInformation& fi) : filesInformation(fi){}

@@ -36,7 +36,9 @@ void CommandHandler::isCommandValid(std::string command,std::vector<std::string>
         //Echo Command
         {"echo", [this](std::vector<std::string>& arguments){this->consoleCommands.echo(arguments);}},
         //Cat Command
-        {"cat", [this](std::vector<std::string>& arguments){this->consoleCommands.cat(arguments);}}
+        {"cat", [this](std::vector<std::string>& arguments){this->consoleCommands.cat(arguments);}},
+        //Rename Files
+        {"rename", [this](std::vector<std::string>& arguments){this->fileManager.renameFiles(arguments);}}
 
     };
 

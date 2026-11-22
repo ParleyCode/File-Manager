@@ -2,6 +2,7 @@
 #include "../CommandHandler/CommandHandler.h"
 #include "../ConsoleCommands/ConsoleCommands.h"
 #include "../FilesInformation.h"
+#include <exception>
 #include <filesystem>
 #include <fstream>
 #include <ios>
@@ -37,6 +38,18 @@ void FileManager::touchFiles(std::vector<std::string>& arguments){
     arguments.clear();
 }
 
+void FileManager::renameFiles(std::vector<std::string> &arguments){
+    fs::path currentPath = filesInformation.getCurrentPath();
+    fs::path oldFilePath = currentPath / arguments[0];
+    fs::path newFilePath = currentPath / arguments[1];
+    if(fs::exists(oldFilePath)){
+        fs::rename(oldFilePath, newFilePath);
+    }
+    else{
+        std::cout << "rename: failed to rename: " << arguments[0] << " does not exist.\n";
+    }
+    arguments.clear();
+}
 FileManager::FileManager(FilesInformation& fi, ConsoleCommands& cc) : filesInformation(fi), consoleCommands(cc){}
 
 
