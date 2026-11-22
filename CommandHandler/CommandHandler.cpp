@@ -38,7 +38,9 @@ void CommandHandler::isCommandValid(std::string command,std::vector<std::string>
         //Cat Command
         {"cat", [this](std::vector<std::string>& arguments){this->consoleCommands.cat(arguments);}},
         //Rename Files
-        {"rename", [this](std::vector<std::string>& arguments){this->fileManager.renameFiles(arguments);}}
+        {"rename", [this](std::vector<std::string>& arguments){this->fileManager.renameFiles(arguments);}},
+        //Stat Command
+        {"stat", [this](std::vector<std::string>& arguments){StatCommand statCommand(filesInformation); statCommand.chooseOperation(arguments);}}
 
     };
 

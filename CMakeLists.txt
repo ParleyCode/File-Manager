@@ -23,5 +23,7 @@ add_executable(FileManager
     Commands/MoveCommand/MoveCommand.cpp
     Commands/CopyCommand/CopyCommand.h
     Commands/CopyCommand/CopyCommand.cpp
+    Commands/StatCommand/StatCommand.h
+    Commands/StatCommand/StatCommand.cpp
     FilesInformation.h
 )
