@@ -50,6 +50,7 @@ void FileManager::renameFiles(std::vector<std::string> &arguments){
     }
     arguments.clear();
 }
+
 FileManager::FileManager(FilesInformation& fi, ConsoleCommands& cc) : filesInformation(fi), consoleCommands(cc){}
 
 

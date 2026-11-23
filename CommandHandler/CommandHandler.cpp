@@ -40,7 +40,8 @@ void CommandHandler::isCommandValid(std::string command,std::vector<std::string>
         //Rename Files
         {"rename", [this](std::vector<std::string>& arguments){this->fileManager.renameFiles(arguments);}},
         //Stat Command
-        {"stat", [this](std::vector<std::string>& arguments){StatCommand statCommand(filesInformation); statCommand.chooseOperation(arguments);}}
+        {"stat", [this](std::vector<std::string>& arguments){StatCommand statCommand(filesInformation); statCommand.chooseOperation(arguments);}},
+        {"wc", [this](std::vector<std::string>& arguments){WordCount wordCount(filesInformation); wordCount.outputResult(arguments);}}
 
     };
 
