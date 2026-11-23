@@ -2,10 +2,13 @@
 #include "../CommandHandler/CommandHandler.h"
 #include "../ConsoleCommands/ConsoleCommands.h"
 #include "../FilesInformation.h"
+#include <cstddef>
+#include <cstdlib>
 #include <exception>
 #include <filesystem>
 #include <fstream>
 #include <ios>
+#include <string>
 #include <vector>
 
 
@@ -50,6 +53,7 @@ void FileManager::renameFiles(std::vector<std::string> &arguments){
     }
     arguments.clear();
 }
+
 
 FileManager::FileManager(FilesInformation& fi, ConsoleCommands& cc) : filesInformation(fi), consoleCommands(cc){}
 
