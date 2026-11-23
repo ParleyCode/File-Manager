@@ -14,6 +14,7 @@ public:
     void chooseOperation(std::vector<std::string>& arguments);
     void operationForDirectory(std::string& element);
     void operationForFiles(std::string& element);
-
+    void showPermissions(fs::path path);
+    void countDirectorySize(fs::path path);
     StatCommand(FilesInformation& fi);
 };
