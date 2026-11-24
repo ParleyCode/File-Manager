@@ -29,5 +29,7 @@ add_executable(FileManager
     Commands/wordCountCommand/WordCount.cpp
     Commands/HeadCommand/HeadCommand.h
     Commands/HeadCommand/HeadCommand.cpp
+    Commands/TailCommand/TailCommand.h
+    Commands/TailCommand/TailCommand.cpp
     FilesInformation.h
 )

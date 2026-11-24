@@ -45,7 +45,8 @@ void CommandHandler::isCommandValid(std::string command,std::vector<std::string>
         {"wc", [this](std::vector<std::string>& arguments){WordCount wordCount(filesInformation); wordCount.outputResult(arguments);}},
         //Head Command
         
-        {"head", [this](std::vector<std::string>& arguments){HeadCommand headCommand(filesInformation); headCommand.headCommand(arguments);}}
+        {"head", [this](std::vector<std::string>& arguments){HeadCommand headCommand(filesInformation); headCommand.headCommand(arguments);}},
+        {"tail", [this](std::vector<std::string>& arguments){TailCommand tailCommand(filesInformation); tailCommand.tailCommand(arguments);}}
     };
 
     if (allCommands.find(command) != allCommands.end()) {

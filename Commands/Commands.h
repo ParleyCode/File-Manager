@@ -5,3 +5,4 @@
 #include "StatCommand/StatCommand.h"
 #include "wordCountCommand/WordCount.h"
 #include "HeadCommand/HeadCommand.h"
+#include "TailCommand/TailCommand.h"
